@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 20, 2023 at 04:52 PM
+-- Generation Time: Jun 27, 2023 at 04:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,6 +35,13 @@ CREATE TABLE `admin` (
   `pass` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`idno`, `fname`, `lname`, `depname`, `pass`) VALUES
+(210395, 'Alfred', 'Marcelino', 'CCSICT', 'Alfred45!');
+
 -- --------------------------------------------------------
 
 --
@@ -46,18 +53,26 @@ CREATE TABLE `bikeinfo` (
   `biketype` varchar(20) DEFAULT NULL,
   `bikecolor` varchar(20) DEFAULT NULL,
   `bikedep` varchar(20) DEFAULT NULL,
-  `stat` set('available','borrowed','repair') NOT NULL
+  `stat` set('available','borrowed','repair') NOT NULL DEFAULT 'available',
+  `count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bikeinfo`
 --
 
-INSERT INTO `bikeinfo` (`bikeid`, `biketype`, `bikecolor`, `bikedep`, `stat`) VALUES
-(3, 'gian', 'red', 'ccje', 'available'),
-(4, 'giant xtc', 'red', 'nursing', 'available'),
-(11, 'mountain', 'red', 'ccsit', 'available'),
-(9211, 'japan', 'red', 'ccsict', 'available');
+INSERT INTO `bikeinfo` (`bikeid`, `biketype`, `bikecolor`, `bikedep`, `stat`, `count`) VALUES
+(201, 'Hard Tail', 'Black', 'CCSICT', 'available', 2),
+(202, 'Full Suspension', 'White', 'CCJE', 'available', 1),
+(203, 'Gravel Bike', 'matte/gold', 'COE', 'available', 0),
+(204, 'Road Bike', 'Glossy Red', 'AGRI', 'available', 0),
+(205, 'TT Bike', 'matte gray', 'CBAPA', 'available', 0),
+(206, 'E-Bike', 'Army green', 'NURSING', 'available', 0),
+(207, 'Fixed Gear', 'carbon', 'FISHERIES', 'available', 0),
+(208, 'Bmx', 'Glossy black', 'BPED', 'available', 1),
+(209, 'Uni Cycle', 'Green', 'BSMA', 'available', 0),
+(210, 'Rigid Bike', 'Black', 'VETMED', 'available', 0),
+(211, 'Giant xtc', 'Maroon', 'CCSICT', 'available', 0);
 
 -- --------------------------------------------------------
 
@@ -82,8 +97,7 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`transno`, `bikeid`, `studidno`, `studfname`, `studlname`, `course`, `depname`, `dtborrow`, `dtreturn`) VALUES
-(7, 3, 210395, 'Alfred', 'Marcelino', 'bsit', 'ccsict', '2023-06-20 20:26:00', '2023-06-20 20:33:00'),
-(8, 4, 210395, 'Alfred', 'Marcelino', 'bsit', 'ccsict', '2023-06-20 20:26:00', '2023-06-20 20:34:00');
+(1, 201, 0, 'Added by admin', '---', '---', '---', '2023-06-27 16:06:29', '2023-06-27 16:06:37');
 
 -- --------------------------------------------------------
 
@@ -92,10 +106,11 @@ INSERT INTO `history` (`transno`, `bikeid`, `studidno`, `studfname`, `studlname`
 --
 
 CREATE TABLE `repairlist` (
+  `no` int(11) NOT NULL,
   `bikeid` int(45) NOT NULL,
-  `studino` int(45) NOT NULL,
+  `studidno` int(45) NOT NULL,
   `brokenparts` varchar(50) NOT NULL,
-  `dateadded` datetime NOT NULL
+  `dateadded` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -121,6 +136,12 @@ ALTER TABLE `history`
   ADD PRIMARY KEY (`transno`);
 
 --
+-- Indexes for table `repairlist`
+--
+ALTER TABLE `repairlist`
+  ADD PRIMARY KEY (`no`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -128,7 +149,13 @@ ALTER TABLE `history`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `transno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `transno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `repairlist`
+--
+ALTER TABLE `repairlist`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

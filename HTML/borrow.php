@@ -56,11 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query2->bind_param("sssssss", $bikeid, $studid, $fname, $lname, $course, $department, $datetime);
         $query2->execute();
 
-        $sql3 = "UPDATE bikeinfo SET stat = ? WHERE bikeid = ?";
+        $sql3 = "UPDATE bikeinfo SET stat = ?, count=count+1 WHERE bikeid = ?";
         $query3 = $conn->prepare($sql3);
         $status = "borrowed";
         $query3->bind_param("ss", $status, $bikeid);
         $query3->execute();
+
 
         if ($query2->affected_rows > 0 && $query3->affected_rows > 0) {
             echo "<script>alert('Transaction Recorded!'); window.location.href='index.php';</script>";

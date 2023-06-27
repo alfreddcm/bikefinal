@@ -20,7 +20,7 @@ if (isset($_GET['delete_id'])) {
     $updatestat->execute();
 
     if ($deleteStmt->execute() && $deleteStmt->affected_rows > 0) {
-        echo "<script>alert('Bike removed from history!'); window.location.href='repairlist.php';</script>";
+        echo "<script>alert('Bike removed from list!'); window.location.href='repairlist.php';</script>";
     } else {
         echo "<script>alert('Error removing bike from history!');</script>";
     }

@@ -58,7 +58,71 @@ if(isset($_GET['delete_id'])){
 
 ?>
 
-<style>
+<script>    
+function showadd() {
+    var addDiv = document.getElementById("add");
+    var updateDiv = document.getElementById("update");
+
+    // Show the 'add' div and hide the 'update' div
+    addDiv.style.display = "block";
+    updateDiv.style.display = "none";
+    event.preventDefault();
+
+}
+
+function updatebike() {
+    var addDiv = document.getElementById("add");
+    var updateDiv = document.getElementById("update");
+
+    // Show the 'update' div and hide the 'add' div
+    updateDiv.style.display = "block";
+    addDiv.style.display = "none";
+    event.preventDefault();
+}
+function cancel() {
+  var addDiv = document.getElementById("add");
+  var updateDiv = document.getElementById("update");
+
+  // Hide both the 'add' and 'update' divs
+  addDiv.style.display = "none";
+  updateDiv.style.display = "none";
+}
+
+function dash(){
+    window.location.href="dashboard.php";
+}
+
+function delete_id(bikeid)
+{
+ if(confirm('Sure To Remove This Record ?'))
+ {
+  window.location.href='bikelist.php?delete_id='+bikeid;
+ }
+}
+function upstat(bikeid)
+{
+ if(confirm('Select ok to continue'))
+ {
+  window.location.href='changestat.php?upstat='+bikeid;
+ }
+}
+
+function confirmSubmit1() {
+        return confirm("Are you sure you want to submit the form?");
+    }
+    function confirmSubmit2() {
+        return confirm("Are you sure you want to submit the form?");
+    }
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Data</title>
+    <link rel="stylesheet" href="style.css" class="rel">
+    <style>
 
 #add, #update {
     display: none;
@@ -142,88 +206,7 @@ if(isset($_GET['delete_id'])){
         color:black;
     }
               /*nav*/
-
-  .box{    
-    background-color: rgba(128, 128, 128, 0.70);
-    color:white;
-    padding:20px;
-    border-radius:7px;
-    width:94%;
-    margin:auto;
-  }
-  .flex{ 
-    display:flex;
-  }
-
-    
 </style>
-
-
-<script>
-    
-function showadd() {
-    var addDiv = document.getElementById("add");
-    var updateDiv = document.getElementById("update");
-
-    // Show the 'add' div and hide the 'update' div
-    addDiv.style.display = "block";
-    updateDiv.style.display = "none";
-    event.preventDefault();
-
-}
-
-function updatebike() {
-    var addDiv = document.getElementById("add");
-    var updateDiv = document.getElementById("update");
-
-    // Show the 'update' div and hide the 'add' div
-    updateDiv.style.display = "block";
-    addDiv.style.display = "none";
-    event.preventDefault();
-}
-function cancel() {
-  var addDiv = document.getElementById("add");
-  var updateDiv = document.getElementById("update");
-
-  // Hide both the 'add' and 'update' divs
-  addDiv.style.display = "none";
-  updateDiv.style.display = "none";
-}
-
-function dash(){
-    window.location.href="dashboard.php";
-}
-
-function delete_id(bikeid)
-{
- if(confirm('Sure To Remove This Record ?'))
- {
-  window.location.href='bikelist.php?delete_id='+bikeid;
- }
-}
-function upstat(bikeid)
-{
- if(confirm('Select ok to continue'))
- {
-  window.location.href='changestat.php?upstat='+bikeid;
- }
-}
-
-function confirmSubmit1() {
-        return confirm("Are you sure you want to submit the form?");
-    }
-    function confirmSubmit2() {
-        return confirm("Are you sure you want to submit the form?");
-    }
-</script>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Data</title>
-    <link rel="stylesheet" href="style.css" class="rel">
 </head>
 
 <body>
@@ -234,6 +217,8 @@ function confirmSubmit1() {
   <a href="repairlist.php">Repair List</a>
   <a href="login.php" onclick="return confirm('Are you sure you want to log out?')">Log out</a>
 </div>
+
+
     <center><h1> Bike List</h1></center>
     <div class="box">
         <div class="flex">
@@ -241,7 +226,8 @@ function confirmSubmit1() {
     <div class="show">
     <button onclick="showadd()">Add Bike</button>
     <button onclick="updatebike()">Edit Bike Information</button>
-        </div>
+        
+</div>
    </div>   
     <center><div id="add">
                 <h1>Adding bike</h1>
@@ -268,16 +254,6 @@ function confirmSubmit1() {
                 </form>
                 <button onclick="cancel()">Cancel</button>
             </div></center>
-
-
-
-
-
-
-
-
-
-
 
 <div class="grid-container">
     <?php
