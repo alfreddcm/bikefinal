@@ -17,7 +17,9 @@ $result = mysqli_query($conn, $sql);
     <title>Bike Management System</title>
 </head>
 <style>
+
     body{
+        color: white;
     display:flex;       
 	height: 100%;
     font-family: Poppins-Regular, sans-serif;
@@ -41,6 +43,7 @@ $result = mysqli_query($conn, $sql);
   height: 300px;
 }
 #idno{
+    
     margin-top:px;
     width:68px;
 }
@@ -114,7 +117,6 @@ input[type="number"]{
     border-top: none;
     border-right: none;
     border-left: none;
-    color: black;
     font-size: 15px;
     letter-spacing: 1px;
     margin-top: 3px;
@@ -122,6 +124,7 @@ input[type="number"]{
 }
 #borrow input[type="text"],
 input[type="number"]{
+    color:white;
     outline: none;
     text-align:center;
     height: 25px;
@@ -130,7 +133,6 @@ input[type="number"]{
     border-top: none;
     border-right: none;
     border-left: none;
-    color: black;
     font-size: 15px;
     letter-spacing: 1px;
     margin-top: 3px;
@@ -194,47 +196,47 @@ If your bike's out of commission, but you still need to get around, you might ne
             <button onclick="gohome()">Help and Support</button>
             <button onclick="gologin()">Login as administrator</button>
         </div>
-        <div class="con"> 
-            <label for="">Select action:</label><br>
-            <select name="status" id="status" required>
-                <option value="borrow">BORROWING</option>
-                <option value="return">RETURNING</option>
-            </select><br>
+<div class="con"> 
+<label for="">Select action:</label><br>
+<select name="status" id="status" required>
+<option value="borrow">BORROWING</option>
+<option value="return">RETURNING</option>
+</select><br>
 
-            <div id="borrow">
-                <form action="borrow.php" method="POST" id="borrowform" onsubmit="return validateForm();">
-                <?php echo "Number available bikes: " . $result->num_rows;?><br>
-                <label for="">Choose bike id:</label><br>
-                <select name="dropd" id="bikeid">
-                    <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                        <option value="<?php echo $row["bikeid"]; ?>">
-                    <?php echo $row["bikeid"]; ?>
-                        </option>
-                    <?php endwhile; ?>
-                    </select>
-                    <input type="number" name="idno" id="idno" placeholder="ID No" require>
-                    <input type="text" name="fname" id="fname" placeholder="First Name" require>
-                    <input type="text" name="lname" id="lname" placeholder="Last Name" require><br>
-                    <input type="text" name="course" id="course" placeholder="Course" require>
-                    <input type="text" name="dep" id="dep" placeholder="Department" require><br>
-                    <input type="datetime-local" name="datetime" id="datetime" require> 
-                    <br>
-                    <center><input type="submit" class="btnn" name="submit"></center>
-                </form>
-                </div>
-        
+<div id="borrow">
+<form action="borrow.php" method="POST" id="borrowform" onsubmit="return validateForm();">
+<?php echo "Number available bikes: " . $result->num_rows;?><br>
+<label for="">Choose bike id:</label><br>
+<select name="dropd" id="bikeid">
+<?php while ($row = mysqli_fetch_assoc($result)): ?>
+<option value="<?php echo $row["bikeid"]; ?>">
+<?php echo $row["bikeid"]; ?>
+</option>
+<?php endwhile; ?>
+</select>
+<input type="text" name="idno" id="idno" placeholder="ID No" require>
+<input type="text" name="fname" id="fname" placeholder="First Name" require>
+<input type="text" name="lname" id="lname" placeholder="Last Name" require><br>
+<input type="text" name="course" id="course" placeholder="Course" require>
+<input type="text" name="dep" id="dep" placeholder="Department" require><br>
+<input type="datetime-local" name="datetime" id="datetime" require> 
+<br>
+<center><input type="submit" class="btnn" name="submit"></center>
+</form>
+</div>
 
-                    <div id="return">
-                        <form action="return.php" method="POST" id="returnform" onsubmit="return validateForm2();">
-                        <label for="">Enter bike id:</label><br>
-                            <center><input type="number" name="bikeidr" id="bikeidr" placeholder="Bike ID">
-                            <input type="text" name="idnor" id="idnor" placeholder="ID No"><br>
-                            <input type="datetime-local" name="datetimer" id="datetimer" require> 
-                            <br>
-                            <input type="submit" name="submit" class="btnn"></center>
-                        </form>
-                        </div>
-    </div>
+
+<div id="return">
+<form action="return.php" method="POST" id="returnform" onsubmit="return validateForm2();">
+<label for="">Enter bike id:</label><br>
+    <center><input type="text" name="bikeidr" id="bikeidr" placeholder="Bike ID">
+    <input type="text" name="idnor" id="idnor" placeholder="ID No"><br>
+    <input type="datetime-local" name="datetimer" id="datetimer" require> 
+    <br>
+    <input type="submit" name="submit" class="btnn"></center>
+</form>
+</div>
+</div>
 </body>
 
 

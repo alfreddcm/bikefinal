@@ -16,13 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $department = "---";
             $datetime = date("Y-m-d H:i:s");
 
-            // Insert a new entry in the history table
             $sql2 = "INSERT INTO history (bikeid, studidno, studfname, studlname, course, depname, dtborrow) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $query2 = $conn->prepare($sql2);
             $query2->bind_param("sssssss", $bikeid, $studid, $fname, $lname, $course, $department, $datetime);
             $query2->execute();
 
-            // Update the bikeinfo table with the new status and increment the count
             $sql3 = "UPDATE bikeinfo SET stat = ?, count = count + 1 WHERE bikeid = ?";
             $query3 = $conn->prepare($sql3);
             $status = "borrowed";
@@ -30,9 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $query3->execute();
 
             echo "<script>alert('Bike status changed successfully!'); window.location.href='bikelist.php';</script>";
-            exit; // Exit the script to prevent further execution
+            exit; 
         } else if ($newStat === "repair") {
-            // Handle the repair status update as before
             $studid = "0";
             header("Location: movetorepair.php?rn=" . $bikeid . "&studidno=" . $studid);
             exit;
@@ -47,7 +44,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $query4->bind_param("ss", $datetime, $bikeid);
             $query4->execute();
 
-            if ($query->execute()) {
+            $deleteStmt = $conn->prepare("DELETE FROM repairlist WHERE bikeid = ?");
+            $deleteStmt->bind_param("s", $bikeid);
+            $deleteStmt->execute();
+
+            if ($query->execute()){
                 echo "<script>alert('Bike status changed successfully!'); window.location.href='bikelist.php';</script>";
                 exit;
             } else {
@@ -58,7 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Invalid bike ID.";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -69,23 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Bike Status</title>
     <link rel="stylesheet" href="style.css" class="rel">
-
-<style>
-    body{
-        display:flex; 
-        align-items:center;
-        justify-content:center;
-       
-    }
-    .bo{
-        margin-top:200px;
-        color:white;
-        width:300px;
-        border:1px solid black;
-        background-color:black;
-    }
-
-</style>
 </head>
 <body>
     <div class="bo">

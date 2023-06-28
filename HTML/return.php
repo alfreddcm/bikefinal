@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $query->store_result();
 
     if ($query->num_rows > 0) {
-
         echo "<script> alert('Student ID: " . $studid . " Bike ID: " . $bikeid . "');</script>";
         $sql2 = "SELECT * FROM history WHERE bikeid = ? AND dtreturn is NULL";
         $query2 = $conn->prepare($sql2);

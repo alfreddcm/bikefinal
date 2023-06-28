@@ -43,6 +43,7 @@ if(isset($_GET['delete_id'])){
         $stmt = $conn->prepare("DELETE FROM bikeinfo WHERE bikeid = ?");
         $stmt->bind_param("s", $bikeid);
         
+        
         if ($stmt->execute()) {
             if ($stmt->affected_rows > 0) {
                 echo "<script>alert('Record Deleted!'); window.location.href='bikelist.php';</script>";

@@ -14,10 +14,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $department = $_POST['dep'];
     $datetime = $_POST['datetime'];
 
-    if ($bikeid === '' || $studid === '' || $fname === '' || $lname === '' || $course === '' || $department === '' || $datetime === '') {
+    if (is_numeric($studid) && strlen($studid) === 6) {
+ if ($bikeid === '' || $studid === '' || $fname === '' || $lname === '' || $course === '' || $department === '' || $datetime === '') {
         echo "<script>alert('Please fill in all required fields.'); window.location.href='index.php';</script>";
         exit();
     }
+      } else {
+        echo "<script>alert('Student id must a number'); window.location.href='index.php';</script>";
+        exit();
+      }
 
     $sql = "SELECT * FROM history ORDER BY transno DESC LIMIT 1";
     $query = $conn->prepare($sql);

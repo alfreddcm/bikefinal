@@ -5,7 +5,6 @@ error_reporting(E_ALL);
 require('connection.php');
 session_start();
 
-
 if (isset($_GET['idno'])){
   $idno = $_GET['idno'];
 
@@ -19,7 +18,7 @@ if (isset($_GET['idno'])){
   $fname = $row['fname'];
   $lname = $row['lname'];
   $depname = $row['depname'];
-
+  
   $_SESSION['fname'] = $fname;
   $_SESSION['lname'] = $lname;
   $_SESSION['depname'] = $depname;
@@ -62,66 +61,62 @@ foreach ($bikeCounts as $bike) {
     <title>Dashboard</title>
     <link rel="stylesheet" href="style.css" class="rel">
     <style>
-
-  
-          .dashboard {
-            width: 80%;
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-              align-items: center;
-              margin-left: auto;
-              margin-right: auto;
-              padding:4px;
+    .dashboard {
+      width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding:4px;
          }
   
-          fieldset {
-            margin: auto;
-            transform:scale(1.1);
-            color:white;
-              border-radius: 10px;
-              border: 3px solid white;
-              width: 2in;
-              height: 1in;
-              margin-bottom: 1in;
-              box-shadow: 2px 2px 2px black;
-          }
-          fieldset legend{
-            width:10rem;
-            height: 1.6rem;
-            background: black;
-            border-radius: 3px;
-            font-size: large;
-            margin-left:-30px;
-          }
-          .fieldset1, .fieldset2, .fieldset3{
-            background-color: #333;
-          }
-          .fieldset1:hover, .fieldset2:hover, .fieldset3:hover{
-            transform:scale(1.2);
-          }
-          .fieldset1{
-            height: auto;
-            margin-top:85px;
+    fieldset {
+      margin: auto;
+      transform:scale(1.1);
+      color:white;
+        border-radius: 10px;
+        border: 3px solid white;
+        width: 2in;
+        height: 1in;
+        margin-bottom: 1in;
+        box-shadow: 2px 2px 2px black;
+      }
+      fieldset legend{
+        width:10rem;
+        height: 1.6rem;
+        background: black;
+        border-radius: 3px;
+        font-size: large;
+        margin-left:-30px;
+      }
+      .fieldset1, .fieldset2, .fieldset3{
+        background-color: #333;
+      }
+      .fieldset1:hover, .fieldset2:hover, .fieldset3:hover{
+        transform:scale(1.2);
+      }
+      .fieldset1{
+        height: auto;
+        margin-top:85px;
 
-          }
+      }
     .href a{
       text-decoration:none;
       color:white;
       width: 100%;
       text-align: center;
-          }
-          .href a{
       text-decoration:none;
       color:white;
       width: 100%;
       text-align: center;
-          }
+      }
 
   .con {
-margin-left:auto;
-margin-right:auto;
-    width:85%;
+  margin-left:auto;
+  margin-right:auto;
+  width:85%;
   display: flex;
   justify-content: space-between;
 }
@@ -235,18 +230,14 @@ margin-right:auto;
                 echo $rowCount . " listed bike ";
             ?>
         </fieldset>
-        <br></a> </div>
-      </div>
-
-  </div>
+        <br></a></div></div></div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     var borrowedCount = <?php echo $borrowedCount; ?>;
     var availableCount = <?php echo $availableCount; ?>;
     var repairCount = <?php echo $repairCount; ?>;
-
-    // Create the chart
+    //chart
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'pie',
